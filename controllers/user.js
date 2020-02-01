@@ -52,7 +52,7 @@ router.post('/login', async function(req, res) {
       }
     })
   }
-  if (user.password === bcrypt.hashSync(password, 3)) {
+  if (bcrypt.compareSync(password, user.password)) {
     res.json({
       id: user.id,
       jwt: jwt.sign(
