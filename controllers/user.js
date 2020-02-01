@@ -24,7 +24,7 @@ router.post('/signup', async function(req, res) {
   }
   await prisma.user.create({
     data: {
-      password: bcrypt.hashSync(password),
+      password: bcrypt.hashSync(password, 3),
       name,
       email
     }
@@ -52,7 +52,7 @@ router.post('/login', async function(req, res) {
       }
     })
   }
-  if (user.password === bcrypt.hashSync(password)) {
+  if (user.password === bcrypt.hashSync(password, 3)) {
     res.json({
       id: user.id,
       jwt: jwt.sign(
