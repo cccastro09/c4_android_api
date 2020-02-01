@@ -10,6 +10,13 @@ router.post('/signup', async function(req, res) {
   let password = req.body.password
   let name = req.body.name
   let email = req.body.email
+  if (!email || !password || !name) {
+    res.status(400).json({
+      error: {
+        message: 'Please fill all fields'
+      }
+    })
+  }
   let user = await prisma.user.findOne({
     where: {
       email: email
@@ -40,6 +47,13 @@ router.post('/login', async function(req, res) {
    */
   let email = req.body.email
   let password = req.body.password
+  if (!email || !password) {
+    res.status(400).json({
+      error: {
+        message: 'Please fill all fields'
+      }
+    })
+  }
   let user = await prisma.user.findOne({
     where: {
       email: email
