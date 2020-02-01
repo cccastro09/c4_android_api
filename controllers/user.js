@@ -9,11 +9,11 @@ const express = require('express')
  * @param {express.Router} router - The date
  */
 module.exports = function(router) {
-  router.post('/signup', function(req, res) {
+  router.post('/signup', async function(req, res) {
     let password = req.body.password
     let name = req.body.name
     let email = req.body.email
-    let user = prisma.user.findOne({
+    let user = await prisma.user.findOne({
       where: {
         email: email
       }
@@ -25,21 +25,25 @@ module.exports = function(router) {
         }
       })
     }
-    let user = prisma.user.create({
+    let user = await prisma.user.create({
       data: {
         password,
         name,
         email
       }
     })
+    res.json({
+      message: 'User registered successfully',
+      error: null
+    })
   })
-  router.post('/login', function(req, res) {
+  router.post('/login', async function(req, res) {
     /*
      * Check if the username and password is correct
      */
     let email = req.body.email
     let password = req.body.password
-    let user = prisma.user.findOne({
+    let user = await prisma.user.findOne({
       where: {
         email: email
       }
@@ -60,7 +64,8 @@ module.exports = function(router) {
           },
           config.JWT_SECRET,
           { expiresIn: 60 * 60 }
-        )
+        ),
+        error: null
       })
     } else {
       /*
