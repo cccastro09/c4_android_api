@@ -7,7 +7,7 @@
 // Learn more about connection strings for your DB: https://pris.ly/d/connection-strings
 datasource pg {
   provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 
 // Other examples for connection strings are:
