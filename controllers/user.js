@@ -16,7 +16,7 @@ router.post('/signup', async function(req, res) {
     }
   })
   if (user) {
-    res.status(40).json({
+    res.status(400).json({
       error: {
         message: 'Email already registered!'
       }
