@@ -13,10 +13,10 @@ app.use('/api', require('./middlewares/auth.js'));
  * Add the protected route '/hello-world' after '/api'
  * So now it is available on /api/hello-world
  */
-app.use('/api', require('./controllers/micoredes.js')(router));
+app.use('/api', require('./controllers/micoredes.js'));
 /*
  * Add the '/login' route handler
  */
-app.use('/', require('./controllers/user.js')(router));
+app.use('/', require('./controllers/user.js'));
 
 module.exports = app;
