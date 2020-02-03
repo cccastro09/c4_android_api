@@ -22,7 +22,7 @@ router.get('/redes', async function(req, res) {
 })
 
 router.get('/redes/image/:id', async function(req, res) {
-  const id = req.params.id
+  const id = parseInt(req.params.id)
   const image = await prisma.microRedes2.findOne({
     where: { id },
     select: {
