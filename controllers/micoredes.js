@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 router.post('/redes', async function(req, res) {
-  const redes = await prisma.microredes2.findMany()
+  const redes = await prisma.microRedes2.findMany()
   res.json(redes)
 })
 
