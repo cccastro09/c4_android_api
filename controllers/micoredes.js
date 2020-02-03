@@ -26,7 +26,7 @@ router.get('/redes/image/:id', async function(req, res) {
     where: { id },
     select: { foto }
   })
-  return image.foto
+  return res.json({ data: image.foto })
 })
 
 module.exports = router
