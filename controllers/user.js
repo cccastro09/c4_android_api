@@ -16,7 +16,7 @@ router.post('/signup', async function(req, res) {
         message: 'Please fill all fields'
       }
     })
-    return;
+    return
   }
   let user = await prisma.user.findOne({
     where: {
@@ -29,7 +29,7 @@ router.post('/signup', async function(req, res) {
         message: 'Email already registered!'
       }
     })
-    return;
+    return
   }
   await prisma.user.create({
     data: {
@@ -55,7 +55,7 @@ router.post('/login', async function(req, res) {
         message: 'Please fill all fields'
       }
     })
-    return;
+    return
   }
   let user = await prisma.user.findOne({
     where: {
@@ -68,11 +68,12 @@ router.post('/login', async function(req, res) {
         message: 'Wrong username or password!'
       }
     })
-    return;
+    return
   }
   if (bcrypt.compareSync(password, user.password)) {
     res.json({
       id: user.id,
+      name: user.name,
       jwt: jwt.sign(
         {
           id: user.id
