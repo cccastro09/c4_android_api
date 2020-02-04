@@ -73,7 +73,6 @@ router.post('/login', async function(req, res) {
   if (bcrypt.compareSync(password, user.password)) {
     res.json({
       id: user.id,
-      name: user.name,
       jwt: jwt.sign(
         {
           id: user.id

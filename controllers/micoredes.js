@@ -2,6 +2,37 @@ const Prisma = require('@prisma/client').PrismaClient
 const prisma = new Prisma()
 const express = require('express')
 const router = express.Router()
+const bcrypt = require('bcrypt')
+
+router.get('/me', async function(req, res) {
+  const user = await prisma.user.findOne({
+    where: { id: req.user.id },
+    select: {
+      name: true,
+      email: true,
+      id: true,
+      password: false
+    }
+  })
+  if (!user) {
+    return res.status(401).json({
+      error: {
+        message: 'User not found'
+      }
+    })
+  }
+  res.json({
+    error: null,
+    user
+  })
+})
+
+router.post('/me/updatePassword', async function(req,res){
+  const newPsw = req.body.password
+  const user = await prisma.user.update({where: { id: req.user.id},data:{
+    password: bcrypt.hashSync(password, 3)
+  }})
+})
 
 router.get('/redes', async function(req, res) {
   const redes = await prisma.microRedes2.findMany({
