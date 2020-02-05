@@ -39,7 +39,7 @@ router.get('/redes', async function(req, res) {
     select: {
       id: true,
       color: true,
-      foto: false,
+      foto: true,
       familia: true,
       n_de_paredes_de_la_espora: true,
       pais: true,
