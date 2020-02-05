@@ -30,8 +30,9 @@ router.get('/me', async function(req, res) {
 router.post('/me/updatePassword', async function(req,res){
   const newPsw = req.body.password
   const user = await prisma.user.update({where: { id: req.user.id},data:{
-    password: bcrypt.hashSync(password, 3)
+    password: bcrypt.hashSync(newPsw, 3)
   }})
+  res.json({error: null, user})
 })
 
 router.get('/redes', async function(req, res) {
