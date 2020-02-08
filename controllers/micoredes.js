@@ -44,6 +44,8 @@ router.get('/redes', async function(req, res) {
       familia: true,
       n_de_paredes_de_la_espora: true,
       pais: true,
+      lat: true,
+      lng: true,
       tamanio_um: true,
       textura_de_la_espora: true,
       tombre_cientifico: true,
